@@ -6,43 +6,67 @@ using UnityEngine;
 public class Level : ScriptableObject
 {
     [Header("Level attributes")]
-    [SerializeField] private Sprite levelSprite;
+    [SerializeField] private Sprite[] levelSprites;
 
     [Header("Level items")]
-    [SerializeField] private List<LevelItem> levelItems;
+    [SerializeField] private List<Item> levelItems;
 
-    private List<Vector2> levelPositions;
+    private Dictionary<int, List<Vector3>> levelPositions;
 
     public Level GetInstance() => Instantiate(this);
 
-    private void OnEnable()
+    private void Awake()
     {
-        levelPositions = new List<Vector2>();
+        levelPositions = new Dictionary<int, List<Vector3>>();
 
-        if (levelSprite == null) return;
+        if (levelSprites == null) return;
 
-        float xSize = levelSprite.texture.width;
-        float ySize = levelSprite.texture.height;
-
-        for (int x = 0; x < xSize; x++)
+        for (int i = 0; i < levelSprites.Length; i++)
         {
-            for (int y = 0; y < ySize; y++)
+            int index = i;
+
+            Sprite sprite = levelSprites[index];
+
+            float xSize = sprite.rect.size.x;
+            float ySize = sprite.rect.size.y;
+
+            int pointCount = 0;
+
+            for (int x = 0; x < xSize; x++)
             {
-                Color point = levelSprite.texture.GetPixel(x, y);
-
-                if (point.a > 0)
+                for (int y = 0; y < ySize; y++)
                 {
-                    float xPos = (x - xSize / 2) + 0.5f;
-                    float yPos = (y - ySize / 2) + 0.5f;
+                    Color point = sprite.texture.GetPixel(x + (int)sprite.rect.xMin, y + (int)sprite.rect.yMin);
 
-                    levelPositions.Add(new Vector2(xPos, yPos));
+                    if (point.a > 0)
+                    {
+                        float xPos = (x - xSize / 2) + 0.5f;
+                        float yPos = (y - ySize / 2) + 0.5f;
+
+                        Vector3 position = new Vector3(xPos, yPos, index);
+
+                        if (levelPositions.ContainsKey(index))
+                        {
+                            levelPositions[index].Add(position);
+                        }
+                        else
+                        {
+                            levelPositions.Add(index, new List<Vector3>()
+                            {
+                                position
+                            });
+                        }
+
+                        pointCount++;
+                    }
                 }
             }
         }
     }
 
-    public Vector2[] GetPositions() => levelPositions.ToArray();
-    public List<LevelItem> GetLevelItems() => levelItems;
+    public int GetLevelPositionListCount() => levelPositions.Count;
+    public Vector3[] GetPositions(int index) => levelPositions[index].ToArray();
+    public List<Item> GetLevelItems() => levelItems;
 }
 
 [Serializable]
