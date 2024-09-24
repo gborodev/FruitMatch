@@ -16,11 +16,7 @@ MonoBehaviour:
   - {fileID: 2117000564, guid: 74197f2713851cc46a2d7c5b1566f0e0, type: 3}
   - {fileID: -92412110, guid: 74197f2713851cc46a2d7c5b1566f0e0, type: 3}
   - {fileID: 1565723624, guid: 74197f2713851cc46a2d7c5b1566f0e0, type: 3}
-  levelItems:
-  - {fileID: 11400000, guid: 8cb781136e797c94dae7da0bdc23e12e, type: 2}
-  - {fileID: 11400000, guid: 1e91774e33df9a244b71ba6e2a1899ff, type: 2}
-  - {fileID: 11400000, guid: 23c9b968a7bc51b489a7e8e794446052, type: 2}
-  - {fileID: 11400000, guid: 6ff3261cf9182b641a51cddddc8a47b0, type: 2}
-  - {fileID: 11400000, guid: 370a177049cfe3e4e98219ff1b2cad2b, type: 2}
-  - {fileID: 11400000, guid: 0303926929b50a4428905b744c368108, type: 2}
-  - {fileID: 11400000, guid: e563deb649c41b440982bf0734c9379e, type: 2}
+  - {fileID: -615325225, guid: 74197f2713851cc46a2d7c5b1566f0e0, type: 3}
+  - {fileID: 1047263095, guid: 74197f2713851cc46a2d7c5b1566f0e0, type: 3}
+  - {fileID: -790535002, guid: 74197f2713851cc46a2d7c5b1566f0e0, type: 3}
+  - {fileID: -685624899, guid: 74197f2713851cc46a2d7c5b1566f0e0, type: 3}

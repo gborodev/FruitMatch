@@ -8,12 +8,7 @@ public class Level : ScriptableObject
     [Header("Level attributes")]
     [SerializeField] private Sprite[] levelSprites;
 
-    [Header("Level items")]
-    [SerializeField] private List<Item> levelItems;
-
     private Dictionary<int, List<Vector3>> levelPositions;
-
-    public Level GetInstance() => Instantiate(this);
 
     private void Awake()
     {
@@ -64,9 +59,9 @@ public class Level : ScriptableObject
         }
     }
 
+    public Level GetInstance() => Instantiate(this);
     public int GetLevelPositionListCount() => levelPositions.Count;
-    public Vector3[] GetPositions(int index) => levelPositions[index].ToArray();
-    public List<Item> GetLevelItems() => levelItems;
+    public List<Vector3> GetPositions(int index) => levelPositions[index];
 }
 
 [Serializable]

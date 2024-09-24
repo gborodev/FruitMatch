@@ -127,8 +127,8 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 40
-        width: 10
+        y: 0
+        width: 9
         height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -147,9 +147,9 @@ TextureImporter:
       name: Level-1_1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 20
-        width: 10
+        x: 9
+        y: 0
+        width: 9
         height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -168,9 +168,9 @@ TextureImporter:
       name: Level-1_2
       rect:
         serializedVersion: 2
-        x: 0
+        x: 18
         y: 0
-        width: 10
+        width: 9
         height: 20
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -179,8 +179,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3179beafd4f462b45903f9caafa3289e
-      internalID: 66185537
+      spriteID: 390d14820e7bc2e4eb0a862d37af1930
+      internalID: -1127345694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Level-1_3
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 0
+        width: 9
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d75b6b22ae39b8e47adc4a4c88bc2888
+      internalID: 213714552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Level-1_4
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 0
+        width: 9
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b8641d3c8aff02a489eb498a0d13df8f
+      internalID: -1188142633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Level-1_5
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 0
+        width: 9
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91f2143eb3e2ca745b62c3476d4d3cd8
+      internalID: 1435692641
       vertices: []
       indices: 
       edges: []
@@ -198,7 +261,10 @@ TextureImporter:
     nameFileIdTable:
       Level-1_0: -1688729651
       Level-1_1: -602641282
-      Level-1_2: 66185537
+      Level-1_2: -1127345694
+      Level-1_3: 213714552
+      Level-1_4: -1188142633
+      Level-1_5: 1435692641
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

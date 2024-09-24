@@ -3,7 +3,7 @@ using UnityEngine;
 
 public static class SlotController
 {
-    private static Vector3[] controlPositions = new Vector3[]
+    public static Vector3[] controlPositions = new Vector3[]
     {
         new Vector3(1, 0 ,0),       //Right
         new Vector3(-1, 0, 0),      //Left        
@@ -15,15 +15,31 @@ public static class SlotController
         new Vector3(-1, -1, 0),     //Left-Down
     };
 
-    public static bool SlotAroundCheck(Vector3 slotPosition, Dictionary<Vector3, ItemSlot> controlSlots)
+    public static void SlotAroundCheck(Vector3 slotPosition, Dictionary<Vector3, ItemSlot> controlSlots)
     {
         for (int i = 0; i < controlPositions.Length; i++)
         {
-            if (controlSlots.ContainsKey(controlPositions[i]))
+            if (controlSlots.ContainsKey(slotPosition + controlPositions[i]))
             {
-                return false;
+                ItemSlot slot = controlSlots[slotPosition + controlPositions[i]];
+                slot.CanPress = false;
             }
         }
-        return true;
+    }
+
+    public static List<ItemSlot> GetUnderItems(Vector3 slotPosition, Dictionary<Vector3, ItemSlot> controlSlots)
+    {
+        List<ItemSlot> slots = new List<ItemSlot>();
+
+        for (int i = 0; i < controlPositions.Length; i++)
+        {
+            if (controlSlots.ContainsKey(slotPosition + controlPositions[i]))
+            {
+                ItemSlot slot = controlSlots[slotPosition + controlPositions[i]];
+                slots.Add(slot);
+            }
+        }
+
+        return slots;
     }
 }

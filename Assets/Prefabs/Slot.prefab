@@ -196,7 +196,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 1.9, y: 1.9, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8965885113661819903}
@@ -260,4 +260,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8db3a3c026ea50949879cd986a1db809, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sp: {fileID: 7114767029861221034}
+  iconSp: {fileID: 7114767029861221034}
+  sp: {fileID: 6574231781034700398}
+  col: {fileID: 8718558674366950059}
+  normalColor: {r: 1, g: 1, b: 1, a: 1}
+  disableColor: {r: 0.7735849, g: 0.7735849, b: 0.7735849, a: 1}

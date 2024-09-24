@@ -10,6 +10,7 @@ public class Item : ScriptableObject
     [SerializeField] private Sprite itemIcon;
 
     //Gets
+    public string ItemName => itemName;
     public Sprite ItemSprite => itemIcon;
 
     private void OnEnable()

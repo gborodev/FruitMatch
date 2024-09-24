@@ -15,12 +15,7 @@ MonoBehaviour:
   levelSprites:
   - {fileID: -1688729651, guid: 9728211b935e37141a2388dcf1f945e4, type: 3}
   - {fileID: -602641282, guid: 9728211b935e37141a2388dcf1f945e4, type: 3}
-  - {fileID: 66185537, guid: 9728211b935e37141a2388dcf1f945e4, type: 3}
-  levelItems:
-  - {fileID: 11400000, guid: 8cb781136e797c94dae7da0bdc23e12e, type: 2}
-  - {fileID: 11400000, guid: 1e91774e33df9a244b71ba6e2a1899ff, type: 2}
-  - {fileID: 11400000, guid: 23c9b968a7bc51b489a7e8e794446052, type: 2}
-  - {fileID: 11400000, guid: 6ff3261cf9182b641a51cddddc8a47b0, type: 2}
-  - {fileID: 11400000, guid: 370a177049cfe3e4e98219ff1b2cad2b, type: 2}
-  - {fileID: 11400000, guid: 0303926929b50a4428905b744c368108, type: 2}
-  - {fileID: 11400000, guid: e563deb649c41b440982bf0734c9379e, type: 2}
+  - {fileID: -1127345694, guid: 9728211b935e37141a2388dcf1f945e4, type: 3}
+  - {fileID: 213714552, guid: 9728211b935e37141a2388dcf1f945e4, type: 3}
+  - {fileID: -1188142633, guid: 9728211b935e37141a2388dcf1f945e4, type: 3}
+  - {fileID: 1435692641, guid: 9728211b935e37141a2388dcf1f945e4, type: 3}
