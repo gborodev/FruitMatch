@@ -1,10 +1,11 @@
-using UnityEditor;
-#if UNITY_EDITOR
 using UnityEngine;
+
+#if UNITY_EDITOR
+using UnityEditor;
 #endif
 
 [CreateAssetMenu(menuName = "Database")]
-public class ItemDatabase : ScriptableObject
+public class GameDatabase : ScriptableObject
 {
     Item[] allItems;
     Level[] allLevels;

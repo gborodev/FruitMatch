@@ -5,57 +5,70 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
-    [Header("Panels")]
-    [SerializeField] private GameObject gameOverPanel;
+    FadeEffect fade;
 
-    private int currentLevel = 1;
+    [SerializeField] GameDatabase database;
+
+    public int CurrentLevel { get; private set; }
 
     private void Start()
     {
-        if (PlayerPrefs.HasKey("Level"))
-        {
-            currentLevel = PlayerPrefs.GetInt("Level");
-        }
-        LevelManager.Instance.SetLevel(currentLevel);
+        fade = GetComponentInChildren<FadeEffect>();
 
-        GameEvents.OnGameOver += GameOver;
-        GameEvents.OnNextGame += NextLevel;
+        GameEvents.OnGameOver += () => GameOver();
+        GameEvents.OnNextGame += () => NextGame();
     }
 
-    public void NextLevel()
+    private void NextGame()
     {
-        LevelManager.Instance.SetLevel(++currentLevel);
-        PlayerPrefs.SetInt("Level", currentLevel);
+        LoadGame(++CurrentLevel);
     }
 
     AsyncOperation load;
     public async void GameOver()
     {
-        load = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+        fade.StartFade();
+        while (fade.IsFading)
+        {
+            await Task.Delay(100);
+        }
 
+        load = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
         while (!load.isDone)
         {
             await Task.Yield();
         }
 
         load = null;
+        fade.EndFade();
 
-        LevelManager.Instance.SetLevel(currentLevel);
-        PlayerPrefs.SetInt("Level", currentLevel);
+        LevelManager.Instance.SetLevel(CurrentLevel);
+        PlayerPrefs.SetInt("Level", CurrentLevel);
     }
-    public async void SetNewStart()
+    public async void LoadGame(int levelIndex = -1)
     {
-        currentLevel = 1;
-        PlayerPrefs.SetInt("Level", currentLevel);
+        Level[] levels = database.GetLevelsFromDatabase();
 
-        load = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+        if (levelIndex < 0 || levelIndex > levels.Length - 1) return;
 
+        CurrentLevel = levelIndex + 1;
+        PlayerPrefs.SetInt("Level", CurrentLevel);
+
+        fade.StartFade();
+        while (fade.IsFading)
+        {
+            await Task.Delay(100);
+        }
+
+        load = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
         while (!load.isDone)
         {
             await Task.Yield();
         }
 
         load = null;
-        LevelManager.Instance.SetLevel(currentLevel);
+        fade.EndFade();
+
+        LevelManager.Instance.SetLevel(levelIndex);
     }
 }

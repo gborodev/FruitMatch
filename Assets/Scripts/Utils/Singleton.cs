@@ -2,13 +2,14 @@ using UnityEngine;
 
 public class Singleton<T> : MonoBehaviour where T : Singleton<T>
 {
-    public static T Instance { get; private set; }
+    public static T Instance => instance;
+    private static T instance;
 
-    protected virtual void Awake()
+    private void Awake()
     {
-        if (Instance == null)
+        if (instance is null)
         {
-            Instance = (T)this;
+            instance = (T)this;
             DontDestroyOnLoad(gameObject);
         }
         else
