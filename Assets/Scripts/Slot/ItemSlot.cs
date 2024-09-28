@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -15,7 +14,18 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     [SerializeField] Color normalColor;
     [SerializeField] Color disableColor;
 
-    public Vector3 Position { get; private set; }
+    public int Layer { get; private set; } = -1;
+
+    private Vector3 position;
+    public Vector3 Position
+    {
+        get => position;
+        set
+        {
+            position = value;
+            Layer = (int)position.z;
+        }
+    }
 
     public event Action<ItemSlot> OnClickEvent;
 
@@ -52,11 +62,6 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
                 iconSp.sprite = item.ItemSprite;
             }
         }
-    }
-
-    public void Triggered(List<Vector3>[] controlPositions)
-    {
-
     }
 
     public void OnPointerClick(PointerEventData eventData)

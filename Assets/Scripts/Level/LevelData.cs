@@ -5,14 +5,15 @@ using UnityEngine;
 [Serializable]
 public class LevelData
 {
-    private int levelID;
+    private Level level;
 
     private List<Vector3>[] allPositions;
 
     public LevelData(Level level)
     {
-        levelID = level.GetInstanceID();
-        allPositions = level.GetPositions();
+        this.level = level.GetInstance();
+
+        allPositions = this.level.GetPositions();
     }
 
     public void ClearLevel()
@@ -31,25 +32,7 @@ public class LevelData
         }
     }
 
-    public void TriggerUnderItem(int zIndex, ItemSlot slot)
-    {
-        int z = zIndex - 1;
-
-        if (z < 0) return;
-
-        for (int zPosition = z; zPosition > 0; zPosition--)
-        {
-            for (int i = 0; i < ControlPosition.sides.Length; i++)
-            {
-                if (allPositions[zPosition].Contains(slot.Position + ControlPosition.sides[i]))
-                {
-                    slot.Triggered(GetPositions(z));
-                }
-            }
-        }
-    }
-
-    private List<Vector3>[] GetPositions(int zIndex)
+    public List<Vector3>[] GetPositions(int zIndex)
     {
         List<List<Vector3>> positions = new List<List<Vector3>>();
 
@@ -60,9 +43,9 @@ public class LevelData
         return positions.ToArray();
     }
 }
-public static class ControlPosition
+public static class Sides
 {
-    public static Vector3[] sides = new Vector3[]
+    private static Vector3[] sides = new Vector3[]
     {
             new Vector3(1, 0 ,0),       //Right
             new Vector3(-1, 0, 0),      //Left        
@@ -73,4 +56,7 @@ public static class ControlPosition
             new Vector3(-1, 1, 0),      //Left-Up
             new Vector3(-1, -1, 0),     //Left-Down
     };
+
+    public static Vector3[] GetSides() => sides;
+
 }

@@ -50,6 +50,6 @@ public class UIController : MonoBehaviour
 
     void Restart()
     {
-        GameManager.Instance.LoadGame(0);
+        GameManager.Instance.LoadGame(1);
     }
 }

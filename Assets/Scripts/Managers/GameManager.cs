@@ -42,16 +42,21 @@ public class GameManager : Singleton<GameManager>
         load = null;
         fade.EndFade();
 
-        LevelManager.Instance.SetLevel(CurrentLevel);
+        int levelIndex = CurrentLevel - 1;
+        Level level = database.GetLevelsFromDatabase()[levelIndex];
+        LevelManager.Instance.SetLevel(level);
+
         PlayerPrefs.SetInt("Level", CurrentLevel);
     }
-    public async void LoadGame(int levelIndex = -1)
+
+    public async void LoadGame(int level)
     {
         Level[] levels = database.GetLevelsFromDatabase();
+        int levelIndex = level - 1;
 
         if (levelIndex < 0 || levelIndex > levels.Length - 1) return;
 
-        CurrentLevel = levelIndex + 1;
+        CurrentLevel = level;
         PlayerPrefs.SetInt("Level", CurrentLevel);
 
         fade.StartFade();
@@ -69,6 +74,7 @@ public class GameManager : Singleton<GameManager>
         load = null;
         fade.EndFade();
 
-        LevelManager.Instance.SetLevel(levelIndex);
+        Level loadLevel = levels[levelIndex];
+        LevelManager.Instance.SetLevel(loadLevel);
     }
 }

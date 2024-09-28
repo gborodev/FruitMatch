@@ -1,15 +1,17 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Data/Level")]
 public class Level : ScriptableObject
 {
     [Header("Level attributes")]
+    [SerializeField] private int level;
     [SerializeField] private Sprite[] levelSprites;
 
     private Dictionary<int, List<Vector3>> levelPositions;
+
+    public int LevelValue => level;
 
     private void Awake()
     {
@@ -63,7 +65,19 @@ public class Level : ScriptableObject
     public Level GetInstance() => Instantiate(this);
     public int GetLevelPositionListCount() => levelPositions.Count;
     public List<Vector3> GetPositions(int index) => levelPositions[index];
-    public List<Vector3>[] GetPositions() => levelPositions.Values.ToArray();
+    public List<Vector3>[] GetPositions()
+    {
+        List<Vector3>[] posList = new List<Vector3>[levelPositions.Count];
+
+        for (int i = 0; i < posList.Length; i++)
+        {
+            int index = i;
+
+            posList[index] = levelPositions[index];
+        }
+
+        return posList;
+    }
 }
 
 [Serializable]

@@ -16,7 +16,7 @@ public class MenuController : MonoBehaviour
 
     private void StartGame()
     {
-        GameManager.Instance.LoadGame(0);
+        GameManager.Instance.LoadGame(1);
         buttonsContent.gameObject.SetActive(false);
     }
 

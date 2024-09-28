@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec6c4c25c2a8fd443a897b253e283167, type: 3}
   m_Name: Level-003
   m_EditorClassIdentifier: 
+  level: 3
   levelSprites:
   - {fileID: -1572369588, guid: b32923e8b912f8843891640009061167, type: 3}
   - {fileID: -1428837455, guid: b32923e8b912f8843891640009061167, type: 3}
