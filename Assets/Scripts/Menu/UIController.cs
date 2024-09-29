@@ -52,4 +52,9 @@ public class UIController : MonoBehaviour
     {
         GameManager.Instance.LoadGame(1);
     }
+
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }

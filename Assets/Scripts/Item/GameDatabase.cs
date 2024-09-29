@@ -7,23 +7,25 @@ using UnityEditor;
 [CreateAssetMenu(menuName = "Database")]
 public class GameDatabase : ScriptableObject
 {
-    Item[] allItems;
-    Level[] allLevels;
+    [SerializeField] Item[] allItems;
+    [SerializeField] Level[] allLevels;
 
     public Item[] GetItemsFromDatabase() => allItems;
     public Level[] GetLevelsFromDatabase() => allLevels;
 
+
 #if UNITY_EDITOR
 
-    private void OnEnable()
-    {
-        LoadItems();
-        EditorApplication.projectChanged += LoadItems;
-    }
-    private void OnDisable()
-    {
-        EditorApplication.projectChanged -= LoadItems;
-    }
+    // private void Awake()
+    // {
+    //     LoadItems();
+    //     EditorApplication.projectChanged += LoadItems;
+    // }
+    //
+    // private void OnDestroy()
+    // {
+    //     EditorApplication.projectChanged -= LoadItems;
+    // }
 
     private void LoadItems()
     {

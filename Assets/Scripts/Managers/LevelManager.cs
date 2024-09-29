@@ -1,5 +1,4 @@
 using Events;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,6 +10,7 @@ public class LevelManager : Singleton<LevelManager>
 
     private List<GameObject> parentList = new List<GameObject>();
 
+    public bool IsLevelFinished => slotItemsDictionary.Count <= 0;
     private Dictionary<Vector3, ItemSlot> slotItemsDictionary;
     private List<Vector3>[] slotPositions;
 
@@ -26,10 +26,10 @@ public class LevelManager : Singleton<LevelManager>
         }
         parentList?.Clear();
 
-        StartCoroutine(LevelInitialized(level));
+        LevelInitialized(level);
     }
 
-    private IEnumerator LevelInitialized(Level level)
+    private void LevelInitialized(Level level)
     {
         if (level is null) Debug.Log("Level is not found");
 
@@ -82,8 +82,6 @@ public class LevelManager : Singleton<LevelManager>
                 //Control Lists
                 items.Remove(item);
                 slotItemsDictionary.Add(position, slot);
-
-                yield return new WaitForFixedUpdate();
             }
         }
 
@@ -95,12 +93,11 @@ public class LevelManager : Singleton<LevelManager>
         List<Vector3> underSides = UnderPositions(slot);
 
         slotItemsDictionary.Remove(slot.Position);
+
+        CollectorEvents.OnSlotCollect?.Invoke(slot.Item);
+
         Destroy(slot.gameObject);
 
-        if (slotItemsDictionary.Count <= 0)
-        {
-            Debug.Log("End");
-        }
 
         for (int i = 0; i < underSides.Count; i++)
         {

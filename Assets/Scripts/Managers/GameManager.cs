@@ -10,6 +10,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] GameDatabase database;
 
     public int CurrentLevel { get; private set; }
+    public int CurrentSceneIndex { get; private set; }
 
     private void Start()
     {
@@ -19,7 +20,7 @@ public class GameManager : Singleton<GameManager>
         GameEvents.OnNextGame += () => NextGame();
     }
 
-    private void NextGame()
+    public void NextGame()
     {
         LoadGame(++CurrentLevel);
     }
@@ -33,7 +34,8 @@ public class GameManager : Singleton<GameManager>
             await Task.Delay(100);
         }
 
-        load = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
+        load = SceneManager.LoadSceneAsync(1);
+
         while (!load.isDone)
         {
             await Task.Yield();
@@ -54,7 +56,12 @@ public class GameManager : Singleton<GameManager>
         Level[] levels = database.GetLevelsFromDatabase();
         int levelIndex = level - 1;
 
-        if (levelIndex < 0 || levelIndex > levels.Length - 1) return;
+        if (levelIndex < 0 || levelIndex > levels.Length - 1)
+        {
+            GameEvents.OnGameFinish?.Invoke();
+
+            return;
+        }
 
         CurrentLevel = level;
         PlayerPrefs.SetInt("Level", CurrentLevel);
@@ -65,7 +72,8 @@ public class GameManager : Singleton<GameManager>
             await Task.Delay(100);
         }
 
-        load = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex + 1);
+        load = SceneManager.LoadSceneAsync(1);
+
         while (!load.isDone)
         {
             await Task.Yield();

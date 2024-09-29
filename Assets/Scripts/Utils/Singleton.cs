@@ -9,8 +9,9 @@ public class Singleton<T> : MonoBehaviour where T : Singleton<T>
     {
         if (instance is null)
         {
-            instance = (T)this;
             DontDestroyOnLoad(gameObject);
+
+            instance = (T)this;
         }
         else
         {

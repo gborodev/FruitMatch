@@ -31,7 +31,10 @@ public class SlotCollector : MonoBehaviour
 
                 if (MatchControl(item))
                 {
-
+                    if (LevelManager.Instance.IsLevelFinished)
+                    {
+                        GameManager.Instance.NextGame();
+                    }
                 }
                 else
                 {
