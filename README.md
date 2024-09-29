@@ -19,7 +19,9 @@
 # Builds
 
 • WebGL Build Files -> Build WebGL
+
 • Android Build Files -> Build Android
+
 • Play at itch.io -> https://borodev.itch.io/fruit-match
 
 ![image](https://github.com/user-attachments/assets/28cb1c89-c40c-4787-a5cb-084e41317d7b)
