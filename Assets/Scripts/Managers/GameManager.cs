@@ -1,5 +1,5 @@
 using Events;
-using System.Threading.Tasks;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -25,20 +25,25 @@ public class GameManager : Singleton<GameManager>
         LoadGame(++CurrentLevel);
     }
 
+    public void GameOver()
+    {
+        StartCoroutine(GameReload());
+    }
+
     AsyncOperation load;
-    public async void GameOver()
+    private IEnumerator GameReload()
     {
         fade.StartFade();
         while (fade.IsFading)
         {
-            await Task.Delay(100);
+            yield return null;
         }
 
         load = SceneManager.LoadSceneAsync(1);
 
         while (!load.isDone)
         {
-            await Task.Yield();
+            yield return null;
         }
 
         load = null;
@@ -51,7 +56,12 @@ public class GameManager : Singleton<GameManager>
         PlayerPrefs.SetInt("Level", CurrentLevel);
     }
 
-    public async void LoadGame(int level)
+    public void LoadGame(int level)
+    {
+        StartCoroutine(Loading(level));
+    }
+
+    private IEnumerator Loading(int level)
     {
         Level[] levels = database.GetLevelsFromDatabase();
         int levelIndex = level - 1;
@@ -60,7 +70,7 @@ public class GameManager : Singleton<GameManager>
         {
             GameEvents.OnGameFinish?.Invoke();
 
-            return;
+            yield break;
         }
 
         CurrentLevel = level;
@@ -69,14 +79,14 @@ public class GameManager : Singleton<GameManager>
         fade.StartFade();
         while (fade.IsFading)
         {
-            await Task.Delay(100);
+            yield return null;
         }
 
         load = SceneManager.LoadSceneAsync(1);
 
         while (!load.isDone)
         {
-            await Task.Yield();
+            yield return null;
         }
 
         load = null;
